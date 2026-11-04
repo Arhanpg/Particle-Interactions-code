@@ -102,7 +102,14 @@ The V1/V2/V3 manager headers calculate launch geometry and shared-memory require
 
 ## Build and run
 
-The repository has separate CUDA and HIP CMake projects. Build from the repository root and keep build outputs outside the source directories.
+The repository has separate CUDA and HIP CMake projects. Start by cloning the repository and entering its root directory:
+
+```bash
+git clone https://github.com/Arhanpg/Particle-Interactions-code.git
+cd Particle-Interactions-code
+```
+
+Build from the repository root and keep build outputs outside the source directories.
 
 ### CUDA
 
