@@ -67,3 +67,13 @@ The paper describes an in-place tree scan for shared memory. During the upward p
 ## 7. Experimental interpretation
 
 The manuscript's experimental devices are NVIDIA T600, NVIDIA A100, and AMD Instinct MI210. The workload uses single-precision arithmetic and uniformly distributed particles. The reported speedups are relative to Par-Part-NoLoop and only apply to the test configurations in the paper. In particular, the paper reports selected X-pencil gains and generally poor All-in-SM performance when shared-memory demand reduces occupancy. V3 source execution should not be confused with a reported published V3 result.
+
+## 8. Source-versus-paper audit notes
+
+A careful reproduction should preserve and report the following differences/limits rather than silently normalize them:
+
+1. **FLOP-count discrepancy:** the paper's experimental section describes the Lennard-Jones interaction as 21 FLOPs per interaction (with square root counted as one FLOP). The imported benchmark source sets `NbFlopsPerInteraction = 18` before calculating its GFLOP/s output. The source was imported unchanged. Consequently, compare elapsed time and interaction throughput independently, and state which FLOP convention was used when reporting GFLOP/s. Do not assume the CSV's GFLOP/s is computed with the paper's 21-FLOP convention.
+2. **V3 reporting:** X-pencil-reg (V3) appears in the source and benchmark output schema, but the paper says its performance results are not presented. Do not attribute V3 numbers to the published paper.
+3. **Default validation mode:** the source driver's normal parameter sweep passes `false` for the `inCheckResult` parameter. The optional comparison path exists but is not run by default.
+4. **Workload sweep:** the paper describes average populations of 1, 10, and 100 particles per cell, with grid divisions 2, 4, 8, 16, and 32. The source initializes `MaxParticlesPerCell = 128`, iterates particle counts by multiplying by ten, and uses `NbLoops = 200`; inspect the actual integer workload for a given grid division when comparing CSVs to the paper's plotted points.
+5. **Hardware dependence:** the paper's results use an NVIDIA T600, NVIDIA A100, and AMD Instinct MI210. Shared-memory capacity, multiprocessor count, architecture, compiler, and occupancy affect which V1/V2/V3 configurations are enabled and how they perform.

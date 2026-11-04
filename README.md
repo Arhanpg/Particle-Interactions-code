@@ -28,8 +28,8 @@ The source files are imported from the upstream author's public GitHub mirror at
 │   ├── prefixsum.hpp
 │   ├── point3d.hpp
 │   ├── SpTimer.hpp
-│   └── sph_manager_v1.hpp
-│   └── sph_manager_v2.hpp
+│   ├── sph_manager_v1.hpp
+│   ├── sph_manager_v2.hpp
 │   └── sph_manager_v3.hpp
 └── hip/
     ├── CMakeLists.txt
@@ -37,8 +37,8 @@ The source files are imported from the upstream author's public GitHub mirror at
     ├── prefixsum.hpp
     ├── point3d.hpp
     ├── SpTimer.hpp
-    └── sph_manager_v1.hpp
-    └── sph_manager_v2.hpp
+    ├── sph_manager_v1.hpp
+    ├── sph_manager_v2.hpp
     └── sph_manager_v3.hpp
 ```
 
