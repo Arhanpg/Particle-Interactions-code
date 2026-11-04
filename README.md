@@ -190,6 +190,8 @@ Refer to the paper's figures and experimental setup before interpreting these nu
 
 ## Documentation
 
+- [Complete code walkthrough](explain.md) — detailed explanation of the complete codebase, GPU parallelism, memory hierarchy, algorithms, and benchmark flow.
+
 - [Citation metadata](CITATION.cff)
 
 - [Paper and code walkthrough](docs/PAPER_AND_CODE_MAP.md)
