@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use or benchmark this implementation, please cite the associated research paper."
+title: "Efficient GPU Implementation of Particle Interactions with Cutoff Radius and Few Particles per Cell"
+authors:
+  - family-names: Algis
+    given-names: David
+  - family-names: Bramas
+    given-names: Bérenger
+  - family-names: Darles
+    given-names: Emmanuelle
+  - family-names: Aveneau
+    given-names: Lilian
+date-released: 2024-06-23
+repository-code: "https://github.com/Arhanpg/Particle-Interactions-code"
+identifiers:
+  - type: arxiv
+    value: "2406.16091"
+    description: "Research paper associated with this source code"

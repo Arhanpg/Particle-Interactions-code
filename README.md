@@ -15,6 +15,8 @@ The source files are imported from the upstream author's public GitHub mirror at
 ```text
 .
 ├── README.md
+├── CITATION.cff
+├── .gitignore
 ├── LICENSE                       # pre-existing repository file; does not automatically re-license imports
 ├── THIRD_PARTY_NOTICES.md
 ├── docs/
@@ -180,6 +182,8 @@ The paper's conclusion is conditional:
 Refer to the paper's figures and experimental setup before interpreting these numbers. The results depend on hardware, workload distribution, kernel configuration, and compiler.
 
 ## Documentation
+
+- [Citation metadata](CITATION.cff)
 
 - [Paper and code walkthrough](docs/PAPER_AND_CODE_MAP.md)
 - [Build, run, and benchmark guide](docs/RUNNING_AND_BENCHMARKING.md)
