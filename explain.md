@@ -333,6 +333,25 @@ IndexToCoord performs the reverse operation by dividing/modulo operations.
 
 This linearization is important because per-cell counts and prefix offsets are ordinary one-dimensional arrays even though the logical grid is three-dimensional.
 
+
+### Additional utility and validation helpers
+
+The benchmark driver also contains smaller functions that support the main path:
+
+- **M_Min and M_Max:** device-side templated helpers that return the smaller or larger of two values. They are used when clamping neighbour-cell bounds to the valid grid.
+- **M_Abs:** a device-side absolute-value helper. Similar absolute-value logic is used by the V3 manager when checking the distance between pencil coordinates.
+- **PBC:** a helper that shifts a coordinate by one box length when it is outside the interval. It is defined in the driver, but the current interaction path does not call it; see the boundary-handling caveat in Part XII.
+- **PrintParticles:** a debug kernel that uses a grid-stride loop to print particle indices and coordinates. It is not part of the normal timed benchmark path.
+- **CheckEqualCpu:** copies the particle arrays from the device to host vectors and compares positions, original indices, and potential values. Potential differences are checked against a relative tolerance of 1e-5, with a special case for a zero reference.
+- **CheckEqual:** performs similar checks in a GPU kernel. Each thread checks one or more particle indices using a grid-stride loop.
+- **CUDA_ASSERT:** wraps CUDA runtime API calls. If a call returns an error, it prints the CUDA error string and the source file/line and terminates the process. Kernel launches are asynchronous, so a later synchronization or runtime call is needed to surface many execution errors.
+- **AllocateParticles:** allocates the five device arrays in ParticlesContainer and records the pointers in a host-side list so they can be released later.
+- **deletePtrs:** iterates over a pointer list, calls cudaFree for each pointer, and synchronizes the device.
+- **ResultFrame:** groups one workload's particle count, candidate interaction count, loop count, grid division, per-method timing/throughput results, V2 launch statistics, and V3 launch statistics.
+- **getFilename:** uses the host system clock and formats the result as results-YYYYMMDD-HHMMSS.csv. The CSV is therefore timestamped and written to the executable's current working directory.
+
+These helpers are useful to understand the full program even though they are not new interaction algorithms.
+
 ## 8. Distance and Lennard-Jones potential
 
 The distance helper calculates:
