@@ -26,7 +26,14 @@ cmake -S cuda -B build/cuda -DCMAKE_BUILD_TYPE=Release -DCUDA_SM=80
 cmake --build build/cuda --parallel
 ```
 
-The `CUDA_SM` cache value is mandatory in the upstream CMake project. The value `80` is an example for compute capability 8.0; select a value supported by both the installed toolkit and target GPU.
+The `CUDA_SM` cache value is mandatory in the upstream CMake project. The value `80` is an example for compute capability 8.0; select a value supported by both the installed toolkit and target GPU. On Windows, use an x64 Visual Studio developer shell:
+
+```powershell
+cmake -S cuda -B build\cuda -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -DCUDA_SM=86
+cmake --build build\cuda --config Release
+```
+
+The CUDA CMake project uses CMake's native CUDA support and requires the CUDA Toolkit, MSVC C++ build tools, and CMake 3.20 or newer.
 
 ### Run
 
@@ -40,6 +47,14 @@ The program writes a timestamped `results-YYYYMMDD-HHMMSS.csv` file to the proce
 mkdir -p results
 cd results
 ../build/cuda/testParticlesPaper
+```
+
+On Windows, run from the repository root and collect the generated CSV:
+
+```powershell
+New-Item -ItemType Directory -Force results
+.\build\cuda\testParticlesPaper.exe *> results\benchmark-console.md
+Move-Item .\results-*.csv .\results\
 ```
 
 ## HIP / ROCm

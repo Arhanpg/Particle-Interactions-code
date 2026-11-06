@@ -37,16 +37,13 @@ if(insource)
                       build directory name that is explicitly marked as to be ignored by Git.")
 endif(insource)
 
-set(CUCSX_LIBRARIES "cudart;cublas")
+find_package(CUDAToolkit REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CUDA_VERBOSE_BUILD ON)
-include(FindCUDA)
-include_directories(${CUDA_INCLUDE_DIRS})
-list(APPEND CUCSX_LIBRARIES ${CUDA_LIBRARIES})
 
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
 endif()
@@ -94,7 +91,7 @@ file(GLOB
 # Adding the project sources dir as an include dir
 INCLUDE_DIRECTORIES( ${UTESTS_CUCSX_SOURCE_DIR})
 
-MESSAGE(STATUS " -- CUCSX_LIBRARIES ${CUCSX_LIBRARIES}")
+MESSAGE(STATUS " -- CUDA toolkit ${CUDAToolkit_VERSION}")
 
 # Add execs - 1 cpp = 1 exec
 foreach(exec ${source_tests_files}) 
@@ -112,12 +109,12 @@ foreach(exec ${source_tests_files})
 
 	target_link_libraries(
 	    ${execname}
-	    ${CUCSX_LIBRARIES}
+	    CUDA::cudart
+	    CUDA::cublas
 	    )
 	target_compile_options(${execname} PRIVATE
         $<$<AND:$<COMPILE_LANGUAGE:CUDA>,$<CONFIG:Debug>>:-lineinfo --generate-line-info>
         $<$<AND:$<COMPILE_LANGUAGE:CUDA>,$<CONFIG:RelWithDebInfo>>:-lineinfo --generate-line-info>
     )
 endforeach(exec)
-
 

@@ -1,0 +1,17 @@
+﻿{
+    "timestamp":  "2026-11-06T14:38:42.1547929+05:30",
+    "repository":  "D:\\Parallel computing project\\Particle-Interactions-code",
+    "git_commit":  "50b54e43f7dc8ed6404bfb1c3fab56c34e4ff717",
+    "os":  "Microsoft Windows 11 Home Single Language",
+    "gpu":  "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "driver":  "32.0.16.1074",
+    "cuda_toolkit":  "13.5",
+    "cuda_architecture":  "86",
+    "cmake":  "4.4.4",
+    "compiler":  "MSVC 19.44.35229.0",
+    "benchmark":  "build/cuda/testParticlesPaper",
+    "correctness_checks_enabled":  false,
+    "duration_seconds":  274.1735169,
+    "exit_code":  0,
+    "csv_output":  "results-20261106-144316.csv"
+}
